@@ -1,0 +1,37 @@
+{
+  "name": "reto-modulo-3-practica",
+  "version": "1.0.0",
+  "description": "Proyecto de aprendizaje construido con Node conectado con MongoDB para el alojamiento de datos relacionados con el manejo de la lista de tareas.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=.env --watch --trace-warnings ./src/index.js",
+    "lint": "eslint 'src/**/*.{js,ts}'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fredymj07/reto-modulo-3-practica-js.git"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "MongoDB"
+  ],
+  "author": "Fredy Montaña",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fredymj07/reto-modulo-3-practica-js/issues"
+  },
+  "homepage": "https://github.com/Fredymj07/reto-modulo-3-practica-js#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.13.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.25.1",
+    "nodemon": "^3.1.9"
+  }
+}
