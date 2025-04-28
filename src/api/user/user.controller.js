@@ -16,7 +16,7 @@ export class UserController {
       } catch (error) {
          res.status(500).json({
             message: 'Error creating user',
-            erro: error.message
+            error: error.message
          });
       }
    }
