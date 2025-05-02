@@ -5,6 +5,52 @@ import { PriorityCategory as priority } from '../../enums/category-priority.enum
 
 export class TaskController {
 
+   /**
+    * @description Método para obtener los estados de las tareas
+    */
+   async getStages( req, res ) {
+      try {
+         res.status( 200 ).json( Object.values(stage) );
+      } catch (error) {
+         res.status( 500 ).json({
+            message: 'Error fetching stages',
+            error: error.message
+         });
+      }
+   }
+
+   /**
+    * @description Método para obtener las prioridades de las tareas
+    */
+   async getPriorities( req, res ) {
+      try {
+         res.status( 200 ).json( Object.values( priority ) );
+      } catch ( error ) {
+         res.status( 500 ).json({
+            message: 'Error fetching priorities',
+            error: error.message
+         });
+      }
+   }
+
+   /**
+    * @description Método para obtener todas las tareas
+    */
+   async getTasks( req, res ) {
+      try {
+         const response = await TaskModel.find();
+         res.status( 200 ).json(response);
+      } catch (error) {
+         res.status( 500 ).json({
+            message: 'Error fetching tasks',
+            error: error.message
+         });
+      }
+   }
+
+   /**
+    * @description Método para crear una nueva tarea
+    */
    async createTask(req, res) {
       try {
          // Creación de nueva tarea
@@ -32,40 +78,9 @@ export class TaskController {
       }
    }
 
-   async getTasks( req, res ) {
-      try {
-         const response = await TaskModel.find();
-         res.status( 200 ).json(response);
-      } catch (error) {
-         res.status( 500 ).json({
-            message: 'Error fetching tasks',
-            error: error.message
-         });
-      }
-   }
-
-   async getStages( req, res ) {
-      try {
-         res.status( 200 ).json( Object.values(stage) );
-      } catch (error) {
-         res.status( 500 ).json({
-            message: 'Error fetching stages',
-            error: error.message
-         });
-      }
-   }
-
-   async getPriorities( req, res ) {
-      try {
-         res.status( 200 ).json( Object.values( priority ) );
-      } catch ( error ) {
-         res.status( 500 ).json({
-            message: 'Error fetching priorities',
-            error: error.message
-         });
-      }
-   }
-
+   /**
+    * @description Método para obtener tareas por ID de usuario
+    */
    async getTaskByUserId(req, res) {
       try {
          const userId = req.query.id;
@@ -78,7 +93,70 @@ export class TaskController {
          res.status( 200 ).json(response);
       } catch (error) {
          res.status( 500 ).json({
+            message: 'Error fetching tasks',
+            error: error.message
+         });
+      }
+   }
+
+   /**
+    * @description Método para obtener tareas por estado
+    */
+   async getTaskByStage(req, res) {
+      try {
+         const stage = req.query.stage;
+
+         if (!stage) {
+            return res.status( 400 ).json({ message: 'Stage is required' });
+         }
+
+         const response = await TaskModel.find({ stage });
+         res.status( 200 ).json(response);
+      } catch (error) {
+         res.status( 500 ).json({
+            message: 'Error fetching tasks',
+            error: error.message
+         });
+      }
+   }
+
+   /**
+    * @description Método para obtener tareas por prioridad
+    */
+   async getTaskByPriority(req, res) {
+      try {
+         const priority = req.query.priority;
+
+         if (!priority) {
+            return res.status( 400 ).json({ message: 'priority is required' });
+         }
+
+         const response = await TaskModel.find({ priority });
+         res.status( 200 ).json(response);
+      } catch (error) {
+         res.status( 500 ).json({
             message: 'Error fetching priorities',
+            error: error.message
+         });
+      }
+   }
+
+   /**
+    * @description Método para obtener tareas por ID de categoría
+    */
+   async getTaskByCategoryId(req, res) {
+      try {
+         const categoryId = req.query.id;
+
+         if (!categoryId) {
+            return res.status( 400 ).json({ message: 'Category ID is required' });
+         }
+
+         const response = await TaskModel.find({ categoryId });
+         res.status( 200 ).json(response);
+      } catch (error) {
+         res.status( 500 ).json({
+            message: 'Error fetching tasks',
             error: error.message
          });
       }
