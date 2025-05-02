@@ -24,5 +24,8 @@ router.get('/api/v1/stages', taskController.getStages.bind(taskController) );
 router.get('/api/v1/priorities', taskController.getPriorities.bind(taskController) );
 router.get('/api/v1/tasks', taskController.getTasks.bind(taskController) );
 router.get('/api/v1/tasksByUser', taskController.getTaskByUserId.bind(taskController) );
+router.get('/api/v1/tasksByStage', taskController.getTaskByStage.bind(taskController) );
+router.get('/api/v1/tasksByPriority', taskController.getTaskByPriority.bind(taskController) );
+router.get('/api/v1/tasksByCategory', taskController.getTaskByCategoryId.bind(taskController) );
 
 export default router;
